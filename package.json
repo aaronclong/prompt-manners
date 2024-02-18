@@ -1,0 +1,19 @@
+{
+  "name": "prompt-manners",
+  "version": "0.0.0",
+  "description": "A prompt injection mitigation library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "llm",
+    "ai",
+    "prompt-injection",
+    "injection",
+    "security",
+    "security-tool"
+  ],
+  "author": "Aaron Long",
+  "license": "Apache License 2.0"
+}
