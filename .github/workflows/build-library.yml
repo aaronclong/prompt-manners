@@ -9,7 +9,7 @@ on:
         type: string
       artifact_path:
         description: "Artifact path to persist the build"
-        default: "prompt-manners-0.0.0.tgz"
+        default: "prompt-manners-*.tgz"
         type: string
 env:
   NODE_VERSION: 18
