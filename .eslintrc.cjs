@@ -15,10 +15,11 @@ module.exports = {
       {
         allowString: false,
         allowNumber: false,
+        files: ["./**/*.{ts,tsx}"],
       },
     ],
   },
-  ignorePatterns: ["src/**/*.test.ts"],
+  ignorePatterns: ["src/**/*.test.ts", "dist/**", "rollup.config.js"],
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: ["./tsconfig.json"],
