@@ -49,7 +49,7 @@ jobs:
           echo "$frag" >> CHANGE_LOG_FRAG.md
 
       - name: Archive CHANGE_LOG_FRAG
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: change-log-frag
           path: "CHANGE_LOG_FRAG.md"
@@ -57,9 +57,9 @@ jobs:
   build_library:
     needs: gen_change_log
     uses: ./.github/workflows/build-library.yml
-    with:
-      node_version: ${{ env.NODE_VERSION }}
-      artifact_path: ${{ env.ARTIFACT_PATH }}
+    # with:
+    #   node_version: ${{ env.NODE_VERSION }}
+    #   artifact_path: ${{ env.ARTIFACT_PATH }}
 
   create_release:
     runs-on: ubuntu-latest
@@ -93,4 +93,4 @@ jobs:
           version=$(echo "${{github.ref}}" | sed 's/refs\/tags\/v//g')
           echo "This the version ${version}"
           npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
-          npm publish artifacts/library-build-dist/aaronclong-barcode-detection-polyfill-${version}.tgz --access public
+          npm publish artifacts/library-build-dist/prompt-manners-${version}.tgz --access public
