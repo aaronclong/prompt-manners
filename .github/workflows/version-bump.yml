@@ -1,4 +1,5 @@
-name: bump version
+name: version bump ➕
+
 on:
   workflow_dispatch:
     inputs:
