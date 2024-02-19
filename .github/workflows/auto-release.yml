@@ -4,7 +4,7 @@ on:
     # https://stackoverflow.com/a/69919067
     branches: [main]
     tags:
-      - "v**"
+      - "v*"
 
 env:
   NODE_VERSION: 18
