@@ -2,14 +2,15 @@ name: build library 🏗️
 on:
   push:
   workflow_call:
-    node_version:
-      description: "Node Version to use for building the library"
-      default: "18"
-      type: string
-    artifact_path:
-      description: "Artifact path to persist the build"
-      default: "prompt-manners-0.0.0.tgz"
-      type: string
+    inputs:
+      node_version:
+        description: "Node Version to use for building the library"
+        default: "18"
+        type: string
+      artifact_path:
+        description: "Artifact path to persist the build"
+        default: "prompt-manners-0.0.0.tgz"
+        type: string
 env:
   NODE_VERSION: 18
   ARTIFACT_PATH: "prompt-manners-*.tgz"
