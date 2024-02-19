@@ -8,6 +8,7 @@ on:
 
 env:
   NODE_VERSION: 18
+  ARTIFACT_PATH: "prompt-manners-*.tgz"
 
 jobs:
   gen_change_log:
@@ -35,7 +36,7 @@ jobs:
 
       - name: "Build Changelog"
         id: changelog
-        uses: metcalfc/changelog-generator@v4.1.0
+        uses: metcalfc/changelog-generator@v4.3.1
         with:
           base-ref: ${{ env.LAST_RELEASE_TAG }}
           myToken: ${{ secrets.GITHUB_TOKEN }}
@@ -56,6 +57,9 @@ jobs:
   build_library:
     needs: gen_change_log
     uses: ./.github/workflows/build-library.yml
+    with:
+      node_version: ${{ env.NODE_VERSION }}
+      artifact_path: ${{ env.ARTIFACT_PATH }}
 
   create_release:
     runs-on: ubuntu-latest

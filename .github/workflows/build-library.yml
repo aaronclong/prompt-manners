@@ -6,8 +6,13 @@ on:
       description: "Node Version to use for building the library"
       default: "18"
       type: string
+    artifact_path:
+      description: "Artifact path to persist the build"
+      default: "prompt-manners-0.0.0.tgz"
+      type: string
 env:
   NODE_VERSION: 18
+  ARTIFACT_PATH: "prompt-manners-*.tgz"
 
 jobs:
   build_library:
@@ -24,7 +29,7 @@ jobs:
       - run: npm pack
 
       - name: Archive build
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: library-build-dist
-          path: "aaronclong-barcode-detection-polyfill-*.tgz"
+          path: ${{ inputs.artifact_path || env.ARTIFACT_PATH }}
