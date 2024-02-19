@@ -13,6 +13,21 @@
     "build": "rollup -c rollup.config.js",
     "lint": "eslint ./src/"
   },
+  "exports": {
+    "types": "./dist/*.d.ts",
+    "import": "./dist/*.mjs",
+    "require": "./dist/*.cjs",
+    "default": "./dist/*.mjs"
+  },
+  "files": [
+    "dist/*.js",
+    "dist/*.js.map",
+    "dist/*.cjs",
+    "dist/*.cjs.map",
+    "dist/*.mjs",
+    "dist/*.mjs.map",
+    "dist/*.d.ts"
+  ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
