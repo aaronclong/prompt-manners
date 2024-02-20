@@ -11,6 +11,9 @@ on:
         description: "Artifact path to persist the build"
         default: "prompt-manners-*.tgz"
         type: string
+      github_ref:
+        description: "GitHub ref"
+        type: string
 env:
   NODE_VERSION: 18
   ARTIFACT_PATH: "prompt-manners-*.tgz"
@@ -20,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.github_ref }}
 
       - uses: ./.github/actions/node-setup
         with:

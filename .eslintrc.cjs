@@ -10,16 +10,9 @@ module.exports = {
   parserOptions: { project: ["./tsconfig.json"] },
   plugins: ["@typescript-eslint"],
   rules: {
-    "@typescript-eslint/strict-boolean-expressions": [
-      2,
-      {
-        allowString: false,
-        allowNumber: false,
-        files: ["./**/*.{ts,tsx}"],
-      },
-    ],
+    "@typescript-eslint/strict-boolean-expressions": "error",
   },
-  ignorePatterns: ["src/**/*.test.ts", "dist/**", "rollup.config.js"],
+  ignorePatterns: ["src/**/*.test.ts", "dist/**", "rollup.config.js", "*.cjs"],
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: ["./tsconfig.json"],
