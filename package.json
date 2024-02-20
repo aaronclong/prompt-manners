@@ -11,7 +11,8 @@
   },
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "lint": "eslint ./src/"
+    "lint": "eslint ./src/",
+    "test": "ava"
   },
   "exports": {
     "types": "./dist/*.d.ts",
@@ -31,6 +32,14 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    },
+    "nodeArguments": [
+      "--import=tsimp"
+    ]
+  },
   "keywords": [
     "llm",
     "ai",
@@ -46,7 +55,9 @@
     "@rollup/plugin-typescript": "^11.1.6",
     "@typescript-eslint/eslint-plugin": "^7.0.1",
     "@typescript-eslint/parser": "^7.0.1",
+    "ava": "^6.1.1",
     "rollup": "^4.12.0",
+    "tsimp": "^2.0.11",
     "tslib": "^2.6.2",
     "typescript": "^5.3.3",
     "typescript-eslint": "^7.0.1"
