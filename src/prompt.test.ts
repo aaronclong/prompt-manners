@@ -1,16 +1,16 @@
 import test from "ava";
 
-import { prompt, instructionPrompt, PromptSymbol } from "./prompt.js";
+import { promptCompiler, instructionPrompt, PromptSymbol } from "./prompt.js";
 
 test("prompt, happy path", (t) => {
-  const { renderPrompt } = prompt`foo`;
+  const { renderPrompt } = promptCompiler`foo`;
   const p = renderPrompt();
   t.falsy(p.value);
   t.false(p.isPresent);
 });
 
 test("prompt, parse slot correctly", (t) => {
-  const { renderPrompt } = prompt`
+  const { renderPrompt } = promptCompiler`
   ${instructionPrompt`Answer the following question`}:<slot>
   Slot: Find the answer to life, the universe, and everything.
 `;

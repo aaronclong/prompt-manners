@@ -39,7 +39,10 @@ export function instructionPrompt(
   };
 }
 
-export function prompt(_literals: TemplateStringsArray, ...args: unknown[]) {
+export function promptCompiler(
+  _literals: TemplateStringsArray,
+  ...args: unknown[]
+) {
   // The question is how do zip them
   // Since this could start as an arg and continue?
   // for this tag the args might be more important
