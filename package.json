@@ -1,7 +1,7 @@
 {
   "name": "prompt-manners",
   "type": "module",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A prompt injection mitigation library",
   "engines": {
     "node": ">=18.0.0"
