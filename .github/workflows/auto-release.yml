@@ -4,7 +4,7 @@ on:
     # https://stackoverflow.com/a/69919067
     # branches: [main]
     tags:
-      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "v**"
 
 env:
   NODE_VERSION: 18
