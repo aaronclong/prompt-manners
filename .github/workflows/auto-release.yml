@@ -1,8 +1,8 @@
-name: Auto Release 🤖🦾🚀
+name: auto release 🤖🦾🚀
 on:
   push:
     tags:
-      - "v**"
+      - "*"
 
 env:
   NODE_VERSION: 18
@@ -11,7 +11,7 @@ env:
 
 jobs:
   gen_change_log:
-    if: ${{ github.ref == '' }}
+    # if: ${{ github.ref == '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,6 +30,7 @@ jobs:
         if: steps.last-release.outcome != 'failure'
         run: |
           echo "LAST_RELEASE_TAG=${{steps.last-release.outputs.release}}" >> $GITHUB_ENV
+          echo "Ref value for debug: ${{ github.ref }}"
 
       - name:
         if: steps.last-release.outcome == 'failure'
