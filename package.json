@@ -14,11 +14,12 @@
     "lint": "eslint ./src/",
     "test": "ava"
   },
+  "main": "dist/index.js",
   "exports": {
-    "types": "./dist/*.d.ts",
-    "import": "./dist/*.mjs",
-    "require": "./dist/*.cjs",
-    "default": "./dist/*.mjs"
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.mjs"
   },
   "files": [
     "dist/*.js",
