@@ -21,5 +21,5 @@ export default {
       },
     },
   ],
-  plugins: [typescript()],
+  plugins: [typescript({ exclude: ["**/__tests__", "**/*.test.ts"] })],
 };
