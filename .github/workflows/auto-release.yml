@@ -1,10 +1,8 @@
+name: Auto Release 🤖🦾🚀
 on:
   push:
-    # https://docs.github.com/en/webhooks-and-events/events/github-event-types#event-payload-object-for-pushevent
-    # https://stackoverflow.com/a/69919067
-    # branches: [main]
     tags:
-      - v*.*.*
+      - "v*"
 
 env:
   NODE_VERSION: 18
