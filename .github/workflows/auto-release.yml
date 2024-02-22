@@ -2,7 +2,7 @@ name: Auto Release 🤖🦾🚀
 on:
   push:
     tags:
-      - "v*"
+      - "v**"
 
 env:
   NODE_VERSION: 18
