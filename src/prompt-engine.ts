@@ -1,8 +1,6 @@
-import { Tokenizer, BPE } from "tokenizers";
+import { Tokenizer } from "tokenizers";
 import { PromptCompiler } from "./prompt.js";
 import { isFalsy } from "./utils.js";
-
-// import { BPE } from "tokenizers/bindings/models";
 
 export interface PromptEngineConfig {
   modelName: string;
@@ -47,6 +45,6 @@ export class PromptEngine {
     // return new Tokenizer(config.modelName);
     // https://huggingface.co/docs/tokenizers/en/quicktour#training-the-tokenizer
     // https://github.com/huggingface/tokenizers/issues/1403
-    return new Tokenizer(BPE.init({}, [], { unkToken: "[UNK]" }));
+    // return new Tokenizer(BPE.init({}, [], { unkToken: "[UNK]" }));
   }
 }
