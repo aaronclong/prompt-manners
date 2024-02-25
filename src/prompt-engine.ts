@@ -42,6 +42,8 @@ export class PromptEngine {
       return config.retokenize;
     }
 
+    throw new Error("Tokenizer not yet implemented");
+
     // return new Tokenizer(config.modelName);
     // https://huggingface.co/docs/tokenizers/en/quicktour#training-the-tokenizer
     // https://github.com/huggingface/tokenizers/issues/1403
