@@ -12,6 +12,20 @@ export interface Prompt {
   [PromptSymbol]: PromptTypes;
 }
 
+export interface DataPrompt extends Prompt {
+  data: string;
+  format: (input: string) => string;
+  [PromptSymbol]: "data";
+}
+
+export function dataPrompt(): DataPrompt {
+  return {
+    data: "", // TODO: handle hard coded inputs for the data prompt
+    format: (input) => input,
+    [PromptSymbol]: "data",
+  };
+}
+
 export interface InstructionPrompt extends Prompt {
   instruction: string;
   [PromptSymbol]: "instruction";
@@ -40,7 +54,7 @@ export function instructionPrompt(
 }
 
 export interface PromptCompiler {
-  renderPrompt: () => Optional<string>;
+  renderPrompt: (input?: string) => Optional<string>;
 }
 
 export function promptCompiler(
@@ -64,7 +78,7 @@ export function promptCompiler(
    * 1. instruction prompt
    * 2. data prompt
    */
-  const renderPrompt = (): Optional<string> => {
+  const renderPrompt = (input: string): Optional<string> => {
     if (!prompts.has("instruction")) {
       return Optional.empty();
     }
@@ -72,6 +86,12 @@ export function promptCompiler(
     let result = "";
     const instruction = prompts.get("instruction") as InstructionPrompt;
     result += instruction.instruction;
+
+    if (input && prompts.has("data")) {
+      result += "\n\n";
+      const data = prompts.get("data") as DataPrompt;
+      result += data.format(input);
+    }
 
     return Optional.of(result);
   };
