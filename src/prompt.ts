@@ -1,4 +1,5 @@
 import { Optional } from "./lib-core.js";
+import { isFalsy } from "./utils.js";
 
 export const PromptSymbol = Symbol.for("prompt-tag");
 
@@ -18,7 +19,12 @@ export interface DataPrompt extends Prompt {
   [PromptSymbol]: "data";
 }
 
-export function dataPrompt(): DataPrompt {
+export function dataPrompt(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _literals: TemplateStringsArray,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  ..._args: unknown[]
+): DataPrompt {
   return {
     data: "", // TODO: handle hard coded inputs for the data prompt
     format: (input) => input,
@@ -78,7 +84,7 @@ export function promptCompiler(
    * 1. instruction prompt
    * 2. data prompt
    */
-  const renderPrompt = (input: string): Optional<string> => {
+  const renderPrompt = (input?: string): Optional<string> => {
     if (!prompts.has("instruction")) {
       return Optional.empty();
     }
@@ -87,10 +93,10 @@ export function promptCompiler(
     const instruction = prompts.get("instruction") as InstructionPrompt;
     result += instruction.instruction;
 
-    if (input && prompts.has("data")) {
+    if (!isFalsy(input) && prompts.has("data")) {
       result += "\n\n";
       const data = prompts.get("data") as DataPrompt;
-      result += data.format(input);
+      result += data.format(input as unknown as string);
     }
 
     return Optional.of(result);
