@@ -39,6 +39,10 @@ export function instructionPrompt(
   };
 }
 
+export interface PromptCompiler {
+  renderPrompt: () => Optional<string>;
+}
+
 export function promptCompiler(
   _literals: TemplateStringsArray,
   ...args: unknown[]
