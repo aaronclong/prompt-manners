@@ -6,6 +6,9 @@
   "engines": {
     "node": ">=18.0.0"
   },
+  "volta": {
+    "node": "18.19.1"
+  },
   "repository": "github.com/aaronclong/prompt-manners",
   "bugs": {
     "url": "https://github.com/aaronclong/prompt-manners/issues"
@@ -13,7 +16,8 @@
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "lint": "eslint ./src/",
-    "test": "ava"
+    "test": "ava",
+    "test:ci": "c8 -r text -r json-summary ava"
   },
   "main": "dist/index.js",
   "exports": {
@@ -58,10 +62,14 @@
     "@typescript-eslint/eslint-plugin": "^7.0.1",
     "@typescript-eslint/parser": "^7.0.1",
     "ava": "^6.1.1",
+    "c8": "^9.1.0",
     "rollup": "^4.12.0",
     "tsimp": "^2.0.11",
     "tslib": "^2.6.2",
     "typescript": "^5.3.3",
     "typescript-eslint": "^7.0.1"
+  },
+  "dependencies": {
+    "tokenizers": "^0.13.3"
   }
 }
