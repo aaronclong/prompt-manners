@@ -1,5 +1,5 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "cSpell.words": ["Retokenization", "retokenize"]
+  "cSpell.words": ["Retokenization", "retokenize", "retokenizer"]
 }
