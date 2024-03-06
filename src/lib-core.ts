@@ -14,7 +14,7 @@ import { isNullish } from "./utils.js";
 // }
 
 export class Optional<T> {
-  constructor(public readonly value: T | undefined | null) {}
+  private constructor(public readonly value?: T) {}
 
   get isPresent(): boolean {
     return !isNullish(this.value);
@@ -25,6 +25,6 @@ export class Optional<T> {
   }
 
   static empty<T>(): Optional<T> {
-    return new Optional<T>(null);
+    return new Optional<T>(undefined);
   }
 }
