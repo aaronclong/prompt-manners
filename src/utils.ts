@@ -1,9 +1,11 @@
+export type Nullish = null | undefined;
+
 /**
  *
  * @param value
  * @returns
  */
-export function isNullish(value: unknown): boolean {
+export function isNullish(value: unknown): value is Nullish {
   return value === null || value === undefined;
 }
 
@@ -13,9 +15,5 @@ export function isNullish(value: unknown): boolean {
  * @returns
  */
 export function isFalsy<T>(value: T | boolean | null | undefined): boolean {
-  if (isNullish(value)) {
-    return true;
-  }
-
-  return value === false;
+  return isNullish(value) || value === false;
 }

@@ -13,11 +13,14 @@ export interface Prompt {
   [PromptSymbol]: PromptTypes;
 }
 
-export interface DataPrompt extends Prompt {
+export interface DataPrompt<T = "default"> extends Prompt {
   data: string;
   format: (input: string) => string;
+  dataPromptType: T;
   [PromptSymbol]: "data";
 }
+
+export interface Paraphrase extends DataPrompt {}
 
 export function dataPrompt(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -28,6 +31,33 @@ export function dataPrompt(
   return {
     data: "", // TODO: handle hard coded inputs for the data prompt
     format: (input) => input,
+    dataPromptType: "default",
+    [PromptSymbol]: "data",
+  };
+}
+
+export function paraphrasePrompt(
+  literals: TemplateStringsArray,
+  ...args: unknown[]
+): DataPrompt<"paraphrase"> {
+  const rawPrompt = literals
+    .map((literal, idx) => {
+      let result = literal;
+      if (idx < args.length) {
+        result += args[idx] as string;
+      }
+
+      return result;
+    })
+    .join("")
+    .trim();
+
+  return {
+    data: rawPrompt, // TODO: handle hard coded inputs for the data prompt
+    format: (input) => {
+      return `${rawPrompt}\n\n${input}`;
+    },
+    dataPromptType: "paraphrase",
     [PromptSymbol]: "data",
   };
 }
@@ -61,6 +91,7 @@ export function instructionPrompt(
 
 export interface PromptCompiler {
   renderPrompt: (input?: string) => Optional<string>;
+  preProcessData: (input: string) => Optional<string>;
 }
 
 export function promptCompiler(
@@ -79,6 +110,18 @@ export function promptCompiler(
     }
   }
 
+  const getDataPrompt = (): DataPrompt | undefined =>
+    prompts.has("data") ? (prompts.get("data") as DataPrompt) : undefined;
+
+  const preProcessData = (input: string): Optional<string> => {
+    const dataPrompt = getDataPrompt();
+    if (!dataPrompt) {
+      return Optional.empty();
+    }
+    const fmt = dataPrompt.format(input);
+    return Optional.of(fmt);
+  };
+
   /**
    * This will always render in this order
    * 1. instruction prompt
@@ -93,10 +136,11 @@ export function promptCompiler(
     const instruction = prompts.get("instruction") as InstructionPrompt;
     result += instruction.instruction;
 
-    if (!isFalsy(input) && prompts.has("data")) {
+    const dataPrompt = getDataPrompt();
+
+    if (!isFalsy(input) && dataPrompt) {
       result += "\n\n";
-      const data = prompts.get("data") as DataPrompt;
-      result += data.format(input as unknown as string);
+      result += input;
     }
 
     return Optional.of(result);
@@ -104,5 +148,6 @@ export function promptCompiler(
 
   return {
     renderPrompt,
+    preProcessData,
   };
 }

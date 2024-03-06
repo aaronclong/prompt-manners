@@ -1,3 +1,4 @@
+import { isNullish } from "./utils.js";
 // export interface Logger {
 //   log(...args: unknown[]): void;
 //   warn(...args: unknown[]): void;
@@ -13,10 +14,10 @@
 // }
 
 export class Optional<T> {
-  constructor(public readonly value: T | undefined | null) {}
+  private constructor(public readonly value?: T) {}
 
   get isPresent(): boolean {
-    return this.value !== undefined && this.value !== null;
+    return !isNullish(this.value);
   }
 
   static of<T>(value: T): Optional<T> {
@@ -24,6 +25,6 @@ export class Optional<T> {
   }
 
   static empty<T>(): Optional<T> {
-    return new Optional<T>(null);
+    return new Optional<T>(undefined);
   }
 }

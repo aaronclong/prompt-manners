@@ -9,10 +9,11 @@ test.skip("retokenize, happy path", async (t) => {
     "Tell me the genre of this band, it's back story, and what are their current projects";
   const compiler = promptCompiler`${instructionPrompt`Food band`}${dataPrompt``}`;
 
-  const engine = new PromptEngine(compiler, {
+  const engine = await PromptEngine.create(compiler, {
     modelName: "gpt2",
     retokenize: true,
   });
+
   const prompt = await engine.buildPrompt(dPrompt);
   t.falsy(prompt.value);
   t.false(prompt.isPresent);
